@@ -145,21 +145,20 @@ An environment contains clusters and its deployed components such as Apache Flin
 
 2. Click on **Cluster Settings**. This is where you can find your *Cluster ID, Bootstrap Server, Cloud Details, Cluster Type,* and *Capacity Limits*.
 3. On the same navigation menu, select **Topics** and click **Create Topic**. 
-4. Enter **customers** as the topic name, **3** as the number of partitions, skip the data contract and then click **Create with defaults**.'
+4. Enter **customers** as the topic name, **1** as the number of partitions, skip the data contract and then click **Create with defaults**.'
 
 <div align="center" padding=25px>
     <img src="images/create-topic.png" width=50% height=50%>
 </div>
 
-5. Repeat the previous step and create a second topic name **credit_cards** and **3** as the number of partitions and skip the data contract.
 
 > **Note:** Topics have many configurable parameters. A complete list of those configurations for Confluent Cloud can be found [here](https://docs.confluent.io/cloud/current/using/broker-config.html). If you are interested in viewing the default configurations, you can view them in the Topic Summary on the right side. 
 
-7. After topic creation, the **Topics UI** allows you to monitor production and consumption throughput metrics and the configuration parameters for your topics. When you begin sending messages to Confluent Cloud, you will be able to view those messages and message schemas.
+6. After topic creation, the **Topics UI** allows you to monitor production and consumption throughput metrics and the configuration parameters for your topics. When you begin sending messages to Confluent Cloud, you will be able to view those messages and message schemas.
 
 ***
 
-## <a name="step-5"></a>Create Datagen Connectors for Customers and Credit Cards
+## <a name="step-5"></a>Create Datagen Connectors for Customers
 The next step is to produce sample data using the Datagen Source connector. You will create two Datagen Source connectors. One connector will send sample customer data to **customers** topic, the other connector will send sample credit card data to **credit_cards** topic.
 
 1. First, you will create the connector that will send data to **customers**. From the Confluent Cloud UI, click on the **Connectors** tab on the navigation menu. Click on the **Datagen Source** icon.
@@ -189,56 +188,7 @@ The next step is to produce sample data using the Datagen Source connector. You 
 </div>
 
 6. Click on **Provide Your Own Schema** and paste the following contents
-```
-{
-  "type": "record",
-  "name": "CustomerRecord",
-  "namespace": "workshop_5",
-  "fields": [
-    {
-      "name": "customer_id",
-      "type": {
-        "type": "int",
-        "arg.properties": {
-          "iteration": {
-            "start": 100
-          }
-        }
-      }
-    },
-    {
-      "name": "customer_email",
-      "type": {
-        "type": "string",
-        "arg.properties": {
-          "options": [
-            "alex.jose@gmail.com",
-            "james.joe@gmail.com",
-            "john.doe@gmail.com",
-            "lisa.kudrow@gmail.com",
-            "jeniffer.aniston@gmail.com",
-            "ross.geller@gmail.com",
-            "joey.tribbiani@gmail.com",
-            "courtney.cox@gmail.com"
-          ]
-        }
-      }
-    },
-    {
-      "name": "average_spending_amount",
-      "type": {
-        "type": "int",
-        "arg.properties": {
-          "range": {
-            "min": 1000,
-            "max": 1500
-          }
-        }
-      }
-    }
-  ]
-}
-```
+
 7. Click on **Continue**, Sizing should be good, click on **Continue** again. You can name the connector anything or leave it as default and click on **Continue**.
 <div align="center" padding=25px>
     <img src="images/connectors-5.png" width=75% height=75%>
@@ -246,51 +196,6 @@ The next step is to produce sample data using the Datagen Source connector. You 
 
 
 8. After few seconds Connector would be provisioned and running. Check for messages in the **customers** topic by navigating to the topics section.
-9. Repeat the same steps to create a connector for **credit_cards** topic by using the below schema but use existing API key this time.
-```
-{
-  "type": "record",
-  "name": "CreditCards",
-  "namespace": "workshop_5",
-  "fields": [
-    {
-      "name": "credit_card_number",
-      "type": {
-        "type": "long",
-        "arg.properties": {
-          "iteration": {
-            "start": 4738273984732749,
-            "step": 749384739937
-          }
-        }
-      }
-    },
-    {
-      "name": "customer_id",
-      "type": {
-        "type": "int",
-        "arg.properties": {
-          "iteration": {
-            "start": 100
-          }
-        }
-      }
-    },
-    {
-      "name": "maximum_limit",
-      "type": {
-        "type": "int",
-        "arg.properties": {
-          "range": {
-            "min": 10000,
-            "max": 50000
-          }
-        }
-      }
-    }
-  ]
-}
-```
 <div align="center" padding=25px>
     <img src="images/connectors-6.png" width=75% height=75%>
 </div>
@@ -352,11 +257,11 @@ The next step is to produce sample data using a client. You will configure a pyt
 5. Copy the configuration snippet shown in the screen and paste in ```client.properties``` file.
 ```bash
 # Required connection configs for Kafka producer, consumer, and admin
-bootstrap.servers=pkc-p11xm.us-east-1.aws.confluent.cloud:9092
+bootstrap.servers=<bootstrap url>
 security.protocol=SASL_SSL
 sasl.mechanisms=PLAIN
-sasl.username=xxxxxxxxxxxx
-sasl.password=xxxxxxxxxxxxxxxxxxxxxxxxxxxx
+sasl.username=<api-key>
+sasl.password=<api-secret>
 
 # Best practice for higher availability in librdkafka clients prior to 1.7
 session.timeout.ms=45000
@@ -375,9 +280,9 @@ client.id=ccloud-python-client-3b98b537-adba-4c2d-b36f-79f964f031c0
 9. Copy the endpoint of Stream Governance API and create a new credentials to access this by clicking on **Add Key**.
 10. Paste the endpoint and API Keys in ```schema.properties``` file like below:
 ```bash
-schema.registry.url=https://psrc-em25q.us-east-2.aws.confluent.cloud
-schema.registry.username=xxxxxxxxxx
-schema.registry.password=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+schema.registry.url=<schema registry url>
+schema.registry.username=<schema registry api-key>
+schema.registry.password=<schema registry api-secret>
 ```
 12. Run the admin client to create required topics.
 ```bash
@@ -398,7 +303,7 @@ You can see records being published to transactions topic.
 
 
 ## <a name="step-8"></a>Perform complex joins using Flink to combine the records into one topic
-Kafka topics and schemas are always in sync with our Flink cluster. Any topic created in Kafka is visible directly as a table in Flink, and any table created in Flink is visible as a topic in Kafka. Effectively, Flink provides a SQL interface on top of Confluent Cloud.
+Kafka topics and schemas are always in sync with our for streaming processing. Any topic created in Kafka is visible directly as a table in ksqlDB, and any table created in Flink is visible as a topic in Kafka. Effectively, Flink provides a SQL interface on top of Confluent Cloud.
 
 1. From the Confluent Cloud UI, click on the **Environments** tab on the navigation menu. Choose your environment.
 2. Click on your **Confluent Cloud Cluster**
@@ -406,46 +311,57 @@ Kafka topics and schemas are always in sync with our Flink cluster. Any topic cr
 4. Click on **Open SQL workspace** button on the top right.
 5. Create an table and stream from the existing topic by running the following SQL query.
 ```sql
-CREATE TABLE CUSTOMERS
-WITH (KAFKA_TOPIC='customers', VALUE_FORMAT='AVRO');
-```
-
-```sql
-CREATE TABLE CREDIT_CARDS
-WITH (KAFKA_TOPIC='credit_cards', VALUE_FORMAT='AVRO');
-```
-
-```sql
 CREATE STREAM TRANSACTIONS
-WITH (KAFKA_TOPIC='transactions', VALUE_FORMAT='AVRO');
+WITH (KAFKA_TOPIC='transactions',VALUE_FORMAT='JSON_SR');
 ```
 
-6. Create a STREAM to join and aggregate to get feature set by running the following query.
 ```sql
-CREATE STREAM AGGREGATE_TRANSACTIONS AS
-SELECT 
-    t.TRANSACTION_ID AS TRANSACTION_ID,
-    t.CREDIT_CARD_NUMBER AS CREDIT_CARD_NUMBER,
-    cust.customer_email AS CUSTOMER_EMAIL,
-    t.amount AS AMOUNT,
-    cust.average_spending_amount AS AVERAGE_SPENDING_AMOUNT,
-    TO_TIMESTAMP(t.transaction_timestamp) AS transaction_timestamp
-FROM TRANSACTIONS t
-INNER JOIN CREDIT_CARDS cc ON t.CREDIT_CARD_NUMBER = cc.CREDIT_CARD_NUMBER
-INNER JOIN CUSTOMERS cust ON cc.CUSTOMER_ID = cust.CUSTOMER_ID
+CREATE STREAM CUSTOMER
+WITH (KAFKA_TOPIC='cdc.public.customers',VALUE_FORMAT='AVRO');
+```
+
+```sql
+CREATE STREAM REKEY_CUSTOMER
+WITH (KAFKA_TOPIC='REKEY_CUSTOMER', VALUE_FORMAT='AVRO')
+AS SELECT *
+FROM CUSTOMER
+PARTITION BY CREDIT_CARD_NUMBER
 EMIT CHANGES;
 ```
 
 ```sql
-CREATE TABLE FEATURE_SET AS
-SELECT 
+CREATE TABLE TABLE_CUSTOMER
+(CUST_ID STRING PRIMARY KEY)
+WITH (KAFKA_TOPIC='REKEY_CUSTOMER', VALUE_FORMAT='AVRO');
+```
+
+6. Create a STREAM to join and aggregate to get feature set by running the following query.
+```sql
+CREATE STREAM AGGREGATE_TRANSACTIONS 
+WITH (KAFKA_TOPIC='AGGREGATE_TRANS', VALUE_FORMAT='JSON_SR')
+AS SELECT 
+    cust.CUST_ID as CUSTOMER_ID,
+    t.TRANSACTION_ID AS TRANSACTION_ID,
+    t.CREDIT_CARD_NUMBER AS CREDIT_CARD_NUMBER,
+    cust.CUSTOMER_EMAIL AS CUSTOMER_EMAIL,
+    t.AMOUNT AS AMOUNT,
+    cust.AVG_SPENDING_AMOUNT AS AVERAGE_SPENDING_AMOUNT
+FROM TRANSACTIONS t
+INNER JOIN TABLE_CUSTOMER cust ON t.CUSTOMER_ID = cust.CUST_ID
+EMIT CHANGES;                                   
+```
+
+```sql
+CREATE TABLE FEATURE_SET 
+WITH (KAFKA_TOPIC='FEATURE_SET',VALUE_FORMAT='JSON_SR',KEY_FORMAT='AVRO')
+AS SELECT 
     CREDIT_CARD_NUMBER,
     CUSTOMER_EMAIL,
     COUNT(TRANSACTION_ID) AS TRANSACTION_COUNT,
     SUM(AMOUNT) AS TOTAL_AMOUNT,
     AVERAGE_SPENDING_AMOUNT,
     TIMESTAMPTOSTRING(WINDOWSTART, 'yyyy-MM-dd HH:mm:ss Z') AS WINDOW_START,
-    TIMESTAMPTOSTRING(WINDOWEND, 'yyyy-MM-dd HH:mm:ss Z') AS WINDOW_END,
+    TIMESTAMPTOSTRING(WINDOWEND, 'yyyy-MM-dd HH:mm:ss Z') AS WINDOW_END
 FROM AGGREGATE_TRANSACTIONS
 WINDOW TUMBLING (SIZE 5 MINUTES)
 GROUP BY CREDIT_CARD_NUMBER, CUSTOMER_EMAIL, AVERAGE_SPENDING_AMOUNT

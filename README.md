@@ -26,7 +26,7 @@
 
 1. Create a Confluent Cloud Account.
     - Sign up for a Confluent Cloud account [here](https://www.confluent.io/confluent-cloud/tryfree/).
-    - Once you have signed up and logged in, click on the menu icon at the upper right hand corner, click on “Billing & payment”, then enter payment details under “Payment details & contacts”. A screenshot of the billing UI is included below.
+    - Once you have signed up and logged in, if you faced a credit card payment please add this promo code **POPTOUT000XLI47** to bypass the payment wall.
 
 2. Install Python 3.8+
    > If you are using a Linux distribution, chances are you already have Python 3 pre-installed. To see which version of Python 3 you have installed, open a command prompt and run

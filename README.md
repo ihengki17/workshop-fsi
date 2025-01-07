@@ -170,7 +170,7 @@ The next step is to produce sample data using the Datagen Source connector. You 
 
 3. Fill the information of target DB to be connected.
 <div align="center" padding=25px>
-    <img src="images/cdc-connector-3.png" width=75% height=75%>
+    <img src="images/cdc-connector-3.png" width=25% height=25%>
 </div>
 
 <div align="center">
@@ -187,7 +187,7 @@ The next step is to produce sample data using the Datagen Source connector. You 
 
 4. Set the Output Value and Key as **AVRO** and change the config as latest changes that will be captured by click the **show advanced configuration**. 
 <div align="center" padding=25px>
-    <img src="images/cdc-connector-4.png" width=75% height=75%>
+    <img src="images/cdc-connector-4.png" width=25% height=25%>
 </div>
 
 <div align="center">
@@ -203,17 +203,17 @@ The next step is to produce sample data using the Datagen Source connector. You 
 
 5. Set as **1** for task and click **continue**.
 <div align="center" padding=25px>
-    <img src="images/cdc-connector-5.png" width=75% height=75%>
+    <img src="images/cdc-connector-5.png" width=25% height=25%>
 </div>
 
 6. Set the connector name as **CDC_Postgresql** then click **continue**
 <div align="center" padding=25px>
-    <img src="images/cdc-connector-6.png" width=75% height=75%>
+    <img src="images/cdc-connector-6.png" width=25% height=25%>
 </div>
 
 7. After few seconds Connector would be provisioned and running. Check for messages in the **cdc.public.customers** topic by navigating to the topics section.
 <div align="center" padding=25px>
-    <img src="images/cdc-connector-7.png" width=75% height=75%>
+    <img src="images/cdc-connector-7.png" width=25% height=25%>
 </div>
 
 > **Note:** If the connectors fails, there are a few different ways to troubleshoot the error:

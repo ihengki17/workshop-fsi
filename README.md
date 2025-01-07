@@ -141,7 +141,7 @@ An environment contains clusters and its deployed components such as Connectors,
 
 2. Click on **Cluster Settings**. This is where you can find your *Cluster ID, Bootstrap Server, Cloud Details, Cluster Type,* and *Capacity Limits*.
 3. On the same navigation menu, select **Topics** and click **Create Topic**. 
-4. Enter **customers** as the topic name, **1** as the number of partitions, skip the data contract and then click **Create with defaults**.'
+4. Enter **customers** as the topic name, **1** as the number of partitions and then click **Create with defaults**. Skip the data contract'
 
 <div align="center" padding=25px>
     <img src="images/create-topic.png" width=50% height=50%>

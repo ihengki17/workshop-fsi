@@ -9,7 +9,7 @@ from confluent_kafka.schema_registry.json_schema import JSONSerializer
 
 # List of Credit Cards and Locations
 # Define the path to your CSV file
-csv_file_path = '/Users/ihengkiriang/Mine/workshop-bcas/archive/git-workshop-bcas/credit_card.csv'
+csv_file_path = './credit_card.csv'
 
 # Initialize an empty list to store the rows
 data = []

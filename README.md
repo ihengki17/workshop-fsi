@@ -314,8 +314,9 @@ Kafka topics and schemas are always in sync with our for streaming processing. A
 1. From the Confluent Cloud UI, click on the **Environments** tab on the navigation menu. Choose your environment.
 2. Click on your **Confluent Cloud Cluster**
 3. Click on **ksqlDB** from the left side pane
-4. Click on **Open SQL workspace** button on the top right.
-5. Create an table and stream from the existing topic by running the following SQL query.
+4. Click on **ksqlDB_cluster** button.
+5. Change auto.offset.reset as **earliest**.
+6. Create an table and stream from the existing topic by running the following SQL query.
 ```sql
 CREATE STREAM TRANSACTIONS
 WITH (KAFKA_TOPIC='transactions',VALUE_FORMAT='JSON_SR');

@@ -11,14 +11,14 @@
 2. [Create an Environment and Cluster](#step-2)
 3. [Create ksqlDB Application](#step-3)
 4. [Create Topics and walk through Confluent Cloud Dashboard](#step-4)
-5. [Create Datagen Connectors for Customers and Credit Cards](#step-5)
+5. [Create CDC Connectors for Customers](#step-5)
 6. [Create a Producer for transactions topic](#step-6)
-7. [Clone the repository and configure the clients](#step-7)
-8. [Add data contract to transactions topic](#step-8)
-9. [Perform joins and transformations using ksqlDB to combine the records into one topic](#step-9)
-10. [Consume feature set topic and predict fraud transactions](#step-10)
-11. [Clean Up Resources](#step-11)
-12. [Confluent Resources and Further Testing](#step-12)
+7. [Clone the repository and configure the clients](#step-6)
+8. [Add data contract to transactions topic](#step-7)
+9. [Perform joins and transformations using ksqlDB to combine the records into one topic](#step-8)
+10. [Consume feature set topic and predict fraud transactions](#step-9)
+11. [Clean Up Resources](#step-10)
+12. [Confluent Resources and Further Testing](#step-11)
 ***
 
 ## **Prerequisites**
@@ -227,19 +227,17 @@ The next step is to produce sample data using the Datagen Source connector. You 
 The next step is to run the producer to produce transaction records to the **transactions** topic.
 
 1. Open VS Code or any editor of your choice and open the github repository folder and run the following command
-```bash
-cd series-getting-started-with-cc/workshop-predictive-ai
-```
-3. Create a virtual environment for this project and activate it by running the following command
+
+2. Create a virtual environment for this project and activate it by running the following command
 ```bash
 python3 -m venv _venv
 source _venv/bin/activate
 ```
-4. Install the dependencies by running the following commmand.
+3. Install the dependencies by running the following commmand.
 ```bash
 pip3 install -r requirements.txt
 ```
-5. Create a ```client.properties``` and ```schema.properties``` files in the current folder. Let these be empty now we'll paste the configurations in the next step.
+4. Create a ```client.properties``` and ```schema.properties``` files in the current folder. Let these be empty now we'll paste the configurations in the next step.
 
 ## <a name="step-7"></a>Create a Python Client for transactions topic
 The next step is to produce sample data using a client. You will configure a python client for **transactions** topic.

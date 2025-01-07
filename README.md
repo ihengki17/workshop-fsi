@@ -177,10 +177,10 @@ The next step is to produce sample data using the Datagen Source connector. You 
 
 | setting                            | value                        |
 |------------------------------------|------------------------------|
-| database.hostname                  | <Based on Group>             |
+| database.hostname                  | [Based on Group]             |
 | database.port                      | 5432                         |
 | database.user                      | postgres                     |
-| database.password                  | <Based on Group>             |
+| database.password                  | [Based on Group]             |
 | database.dbname                    | postgres                     |
 | SSL Mode                           | Prefer                       |
 </div>

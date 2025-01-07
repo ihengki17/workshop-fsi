@@ -44,11 +44,7 @@
 
 4. Clone this repo:
    ```
-   git clone git@github.com:confluentinc/commercial-workshops.git
-   ```
-   or
-   ```
-   git clone https://github.com/confluentinc/commercial-workshops.git
+   git clone https://github.com/ihengki17/workshop-fsi.git
    ```
 
 5. Install confluent cloud CLI based on your OS (https://docs.confluent.io/confluent-cli/current/install.html)
@@ -159,62 +155,72 @@ An environment contains clusters and its deployed components such as Apache Flin
 ***
 
 ## <a name="step-5"></a>Create Datagen Connectors for Customers
-The next step is to produce sample data using the Datagen Source connector. You will create two Datagen Source connectors. One connector will send sample customer data to **customers** topic, the other connector will send sample credit card data to **credit_cards** topic.
+The next step is to produce sample data using the Datagen Source connector. You will create two Datagen Source connectors. One connector will send sample customer data to **customers** topic.
 
-1. First, you will create the connector that will send data to **customers**. From the Confluent Cloud UI, click on the **Connectors** tab on the navigation menu. Click on the **Datagen Source** icon.
+1. First, you will create the connector that will send data to **customers**. From the Confluent Cloud UI, click on the **Connectors** tab on the navigation menu. Click on the **CDC Postgresql V2** icon.
 
 <div align="center" padding=25px>
-    <img src="images/connectors.png" width=75% height=75%>
+    <img src="images/cdc-connector-1.png" width=75% height=75%>
 </div>
 
-2. Click **Additional Configuration** button.
+2. Click **Generate API Key and Download** and give any description. The API key would be downloaded and would be available in the downloads folder in the system
 <div align="center" padding=25px>
-    <img src="images/connectors-1.png" width=75% height=75%>
+    <img src="images/cdc-connector-2.png" width=75% height=75%>
 </div>
 
-3. Choose **customers** topic.
+3. Fill the information of target DB to be connected.
 <div align="center" padding=25px>
-    <img src="images/connectors-2.png" width=75% height=75%>
+    <img src="images/cdc-connector-3.png" width=75% height=75%>
 </div>
 
-4. Click **Generate API Key and Download** and give any description. The API key would be downloaded and would be available in the downloads folder in the system
-<div align="center" padding=25px>
-    <img src="images/connectors-3.png" width=75% height=75%>
+<div align="center">
+
+| setting                            | value                        |
+|------------------------------------|------------------------------|
+| database.hostname                  | <Based on Group>             |
+| database.port                      | 5432                         |
+| database.user                      | postgres                     |
+| database.password                  | <Based on Group>             |
+| database.dbname                    | postgres                     |
+| SSL Mode                           | Prefer                       |
 </div>
 
-5. Choose **JSON_SR** for select output record value format.
+4. Set the Output Value and Key as **AVRO** and change the config as latest changes that will be captured by click the **show advanced configuration**. 
 <div align="center" padding=25px>
-    <img src="images/connectors-4.png" width=75% height=75%>
+    <img src="images/cdc-connector-4.png" width=75% height=75%>
 </div>
 
-6. Click on **Provide Your Own Schema** and paste the following contents
+<div align="center">
 
-7. Click on **Continue**, Sizing should be good, click on **Continue** again. You can name the connector anything or leave it as default and click on **Continue**.
-<div align="center" padding=25px>
-    <img src="images/connectors-5.png" width=75% height=75%>
+| setting                            | value                        |
+|------------------------------------|------------------------------|
+| Output Value                       | AVRO                         |
+| Output Key                         | STRING                       |
+| Topic Prefix                       | cdc                          |
+| Tables Included                    | public.customers             |
+| After-state only                   | true                         |
 </div>
 
-
-8. After few seconds Connector would be provisioned and running. Check for messages in the **customers** topic by navigating to the topics section.
+5. Set as **1** for task and click **continue**.
 <div align="center" padding=25px>
-    <img src="images/connectors-6.png" width=75% height=75%>
+    <img src="images/cdc-connector-5.png" width=75% height=75%>
 </div>
 
+6. Set the connector name as **CDC_Postgresql** then click **continue**
 <div align="center" padding=25px>
-    <img src="images/connectors-7.png" width=75% height=75%>
+    <img src="images/cdc-connector-6.png" width=75% height=75%>
+</div>
+
+7. After few seconds Connector would be provisioned and running. Check for messages in the **cdc.public.customers** topic by navigating to the topics section.
+<div align="center" padding=25px>
+    <img src="images/cdc-connector-7.png" width=75% height=75%>
 </div>
 
 > **Note:** If the connectors fails, there are a few different ways to troubleshoot the error:
 > * Click on the *Connector Name*. You will see a play and pause button on this page. Click on the play button.
 > * Click on the *Connector Name*, go to *Settings*, and re-enter your API key and secret. Double check there are no extra spaces at the beginning or end of the key and secret that you may have accidentally copied and pasted.
-> * If neither of these steps work, try creating another Datagen connector.
+> * If neither of these steps work, try creating another CDC connector.
 
-
-11. You can view the sample data flowing into topics in real time. Navigate to  the **Topics** tab and then click on the **customers** and **credit_cards**. You can view the production and consumption throughput metrics here.
-
-12. Click on **Messages**.
-
-* You should now be able to see the messages within the UI. You can view the specific messages by clicking the icon.
 ***
 
 ## <a name="step-6"></a>Configure the clients.

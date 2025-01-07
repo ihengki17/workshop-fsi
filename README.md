@@ -157,7 +157,7 @@ An environment contains clusters and its deployed components such as Connectors,
 ## <a name="step-5"></a>Create Datagen Connectors for Customers
 The next step is to produce sample data using the Datagen Source connector. You will create two Datagen Source connectors. One connector will send sample customer data to **customers** topic.
 
-1. First, you will create the connector that will send data to **customers**. From the Confluent Cloud UI, click on the **Connectors** tab on the navigation menu. Click on the **CDC Postgresql V2** icon.
+1. First, you will create the connector that will send data to **customers**. From the Confluent Cloud UI, click on the **Connectors** tab on the navigation menu. Click on the **Postgres CDC Source V2** icon.
 
 <div align="center" padding=25px>
     <img src="images/cdc-connector-1.png" width=75% height=75%>
@@ -413,7 +413,7 @@ This illustrates the power of integrating Confluent Cloud for efficient data str
 
 Deleting the resources you created during this workshop will prevent you from incurring additional charges. 
 
-1. Delete the CDC Postgresql V2 Source connectors for **customers_connector**. Navigate to the **Connectors** tab and select each connector. In the settings tab, you will see a **trash** icon on the bottom of the page. Click the icon and enter the **Connector Name**.
+1. Delete the Postgres CDC Source V2 connectors for **customers_connector**. Navigate to the **Connectors** tab and select each connector. In the settings tab, you will see a **trash** icon on the bottom of the page. Click the icon and enter the **Connector Name**.
 <div align="center">
     <img src="images/delete-connectors.png" width=75% height=75%>
 </div>

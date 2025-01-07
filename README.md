@@ -66,7 +66,7 @@ Welcome to “Build Predictive Machine Learning Models Using Streaming Data Pipe
 By the end of this workshop, you'll have a clear understanding of how to utilize Confluent Cloud’s features to build a foundation for machine learning applications, empowering you to transform your streaming data into valuable predictions and insights.
 
 <div align="center" padding=25px>
-    <img src="images/arc.png" width=75% height=75%>
+    <img src="images/architecture.png" width=75% height=75%>
 </div>
 
 ***
@@ -406,13 +406,7 @@ python3 fraud_detector.py
 In this setup, a data engineer can extract the required features from various sources into separate topics. These topics enable data scientists to leverage the curated feature sets to develop and train machine learning models outside of the Confluent Cloud environment.
 This illustrates the power of integrating Confluent Cloud for efficient data streaming and feature engineering in the ML workflow.
 
-4. We shall see some fraudulent transactions under ***fraudulent_transactions*** topic by running the following command in flink
-```sql
-SELECT details FROM fraudulent_transactions
-```
-<div align="center" padding=25px>
-    <img src="images/fraud_transactions.png" width=75% height=75%>
-</div>
+4. We shall see some fraudulent transactions under ***fraudulent_transactions*** topic on message.
 ***
 
 ## <a name="step-10"></a>Clean Up Resources

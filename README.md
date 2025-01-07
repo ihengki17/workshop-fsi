@@ -61,7 +61,7 @@
 
 <br>
 
-Welcome to “Build Predictive Machine Learning Models Using Streaming Data Pipelines”! In this workshop, you will discover how to leverage the capabilities of Confluent Cloud to enable the development of predictive machine learning models using streaming data. We will focus on showcasing how Confluent Cloud, along with Apache Flink and Kafka, can facilitate the creation and deployment of effective data pipelines for real-time analytics.
+Welcome to “Build Predictive Machine Learning Models Using Streaming Data Pipelines”! In this workshop, you will discover how to leverage the capabilities of Confluent Cloud to enable the development of predictive machine learning models using streaming data. We will focus on showcasing how Confluent Cloud, along with ksqlDB and Kafka, can facilitate the creation and deployment of effective data pipelines for real-time analytics.
 
 By the end of this workshop, you'll have a clear understanding of how to utilize Confluent Cloud’s features to build a foundation for machine learning applications, empowering you to transform your streaming data into valuable predictions and insights.
 
@@ -86,7 +86,7 @@ By the end of this workshop, you'll have a clear understanding of how to utilize
 
 ## <a name="step-2"></a>Create an Environment and Cluster
 
-An environment contains clusters and its deployed components such as Apache Flink, Connectors, ksqlDB, and Schema Registry. You have the ability to create different environments based on your company's requirements. For example, you can use environments to separate Development/Testing, Pre-Production, and Production clusters. 
+An environment contains clusters and its deployed components such as Connectors, ksqlDB, and Schema Registry. You have the ability to create different environments based on your company's requirements. For example, you can use environments to separate Development/Testing, Pre-Production, and Production clusters. 
 
 1. Click **+ Add Environment**. Specify an **Environment Name** and Click **Create**. 
 
@@ -308,8 +308,8 @@ You can see records being published to transactions topic.
 > * Click on the *Cluster Overiview*, go to *Cluster Settings*,. Double check there are no extra spaces at the beginning or end of the key and secret that you may have accidentally copied and pasted in ```client.properties``` file also verify the ```bootstrap.servers``` value by comparing it with the *Bootstrap Server* value in the Endpoints section in UI. Also verify the ```schema.properties```
 
 
-## <a name="step-8"></a>Perform complex joins using Flink to combine the records into one topic
-Kafka topics and schemas are always in sync with our for streaming processing. Any topic created in Kafka is visible directly as a table in ksqlDB, and any table created in Flink is visible as a topic in Kafka. Effectively, Flink provides a SQL interface on top of Confluent Cloud.
+## <a name="step-8"></a>Perform joins and aggregate using ksqlDB to combine the records into one topic
+Kafka topics and schemas are always in sync with our for streaming processing. Any topic created in Kafka is visible directly as a table in ksqlDB, and any table created in ksqlDB is visible as a topic in Kafka. Effectively, ksqlDB provides a SQL interface on top of Confluent Cloud.
 
 1. From the Confluent Cloud UI, click on the **Environments** tab on the navigation menu. Choose your environment.
 2. Click on your **Confluent Cloud Cluster**
@@ -419,14 +419,14 @@ SELECT details FROM fraudulent_transactions
 
 Deleting the resources you created during this workshop will prevent you from incurring additional charges. 
 
-1. The first item to delete is the Apache Flink Compute Pool. Select the **Delete** button under **Actions** and enter the **Application Name** to confirm the deletion. 
+1. Delete the CDC Postgresql V2 Source connectors for **customers_connector**. Navigate to the **Connectors** tab and select each connector. In the settings tab, you will see a **trash** icon on the bottom of the page. Click the icon and enter the **Connector Name**.
 <div align="center">
-    <img src="images/flink-delete-compute-pool.png" width=50% height=50%>
+    <img src="images/delete-connectors.png" width=75% height=75%>
 </div>
 
-2. Next, delete the Datagen Source connectors for **credit_cards_connector**, **customers_connector**. Navigate to the **Connectors** tab and select each connector. In the settings tab, you will see a **trash** icon on the bottom of the page. Click the icon and enter the **Connector Name**.
+2. Next, under **ksqlDB**, select **Delete** under the actions. 
 <div align="center">
-    <img src="images/delete-connector.png" width=75% height=75%>
+    <img src="images/delete-ksql.png" width=50% height=50%>
 </div>
 
 3. Next, under **Cluster Settings**, select the **Delete Cluster** button at the bottom. Enter the **Cluster Name** and select **Confirm**. 

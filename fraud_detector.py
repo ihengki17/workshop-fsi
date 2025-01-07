@@ -186,7 +186,7 @@ if __name__ == "__main__":
      	 "name": "CREDIT_CARD_NUMBER",
       	 "type": [
         	"null",
-        	"long"
+        	"string"
       	 ]
     	},
     	{

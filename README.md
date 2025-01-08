@@ -74,7 +74,7 @@ Group3
 
 Endpoint: hengki-workshop3.cnsmb5rssolr.ap-southeast-3.rds.amazonaws.com
 
-Password: AUgVukPl55BIVxTs9Job
+Password: Bi6Pd12xzaiFOHHggS3Z
 
 ***
 

@@ -57,27 +57,6 @@
 
 ***
 
-## **Group**
-Group1
-
-Endpoint: hengki-workshop-1.cnsmb5rssolr.ap-southeast-3.rds.amazonaws.com
-
-Password: kBG5KFkpxqjDVLv9cZrh
-
-Group2
-
-Endpoint: hengki-workshop2.cnsmb5rssolr.ap-southeast-3.rds.amazonaws.com
-
-Password: iSJ1z4AqaX64pbKoy3L7
-
-Group3
-
-Endpoint: hengki-workshop3.cnsmb5rssolr.ap-southeast-3.rds.amazonaws.com
-
-Password: Bi6Pd12xzaiFOHHggS3Z
-
-***
-
 ## **Objective**
 
 <br>

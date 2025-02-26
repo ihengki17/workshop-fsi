@@ -180,7 +180,7 @@ The next step is to produce sample data using the Datagen Source connector. You 
 | database.hostname                  | [Based on Group]             |
 | database.port                      | 5432                         |
 | database.user                      | postgres                     |
-| database.password                  | [Based on Group]             |
+| database.password                  | r758GY3FY27jqOba2m3b         |
 | database.dbname                    | postgres                     |
 | SSL Mode                           | Prefer                       |
 </div>

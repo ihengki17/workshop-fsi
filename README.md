@@ -175,14 +175,16 @@ The next step is to produce sample data using the Datagen Source connector. You 
 
 <div align="center">
 
-| setting                            | value                        |
-|------------------------------------|------------------------------|
-| database.hostname                  | [Based on Group]             |
-| database.port                      | 5432                         |
-| database.user                      | postgres                     |
-| database.password                  | r758GY3FY27jqOba2m3b         |
-| database.dbname                    | postgres                     |
-| SSL Mode                           | Prefer                       |
+| setting                            | value                                                                     |
+|------------------------------------|---------------------------------------------------------------------------|
+| database.hostname                  | hengki-pegadaian-workshop.cqzooevua9cx.ap-southeast-1.rds.amazonaws.com   |
+|                                    | hengki-pegadaian-workshop-2.cqzooevua9cx.ap-southeast-1.rds.amazonaws.com |
+|                                    | hengki-pegadaian-workshop-3.cqzooevua9cx.ap-southeast-1.rds.amazonaws.com |
+| database.port                      | 5432                                                                      |
+| database.user                      | postgres                                                                  |
+| database.password                  | r758GY3FY27jqOba2m3b                                                      |
+| database.dbname                    | postgres                                                                  |
+| SSL Mode                           | Prefer                                                                    |
 </div>
 
 4. Set the Output Value and Key as **AVRO** and change the config as latest changes that will be captured by click the **show advanced configuration**. 
